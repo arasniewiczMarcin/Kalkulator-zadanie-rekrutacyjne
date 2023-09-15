@@ -1,0 +1,403 @@
+[
+  {
+    "type": "scopeDefinition",
+    "items": [
+      {
+        "type": "scope",
+        "name": "Excavator",
+        "id": "excavator"
+      },
+      {
+        "type": "scope",
+        "name": "Crane",
+        "id": "crane"
+      },
+      {
+        "type": "scope",
+        "name": "Roller",
+        "id": "roller"
+      }
+    ]
+  },
+  {
+    "type": "sectionDefinition",
+    "items": [
+      {
+        "type": "section",
+        "name": "What type of road building equipment is desired? *",
+        "mustSelectRequirement": {
+          "enabled": true,
+          "messageIfNotSelected": "Question 1 - Choose road building equipment"
+        },
+        "selectionType": "multi",
+        "items": [
+          {
+            "type": "sectionItemWithScope",
+            "name": "Excavator",
+            "description": "Excavator which allows you to dig holes and move earth.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Excavator",
+            "enableScope": "excavator",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "executeIfScopeEnabled": "excavator",
+                "relatedValue": "excavator_crane_multiplier",
+                "number": 1
+              },
+              {
+                "type": "multiply",
+                "executeIfScopeEnabled": "crane",
+                "relatedValue": "excavator_crane_multiplier",
+                "number": 0
+              },
+              {
+                "type": "add",
+                "executeIfScopeEnabled": "crane",
+                "relatedValue": "excavator_crane_multiplier",
+                "number": 1.2
+              }
+            ]
+          },
+          {
+            "type": "sectionItemWithScope",
+            "name": "Crane",
+            "description": "Crane which allows you to lift heavy objects.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Crane",
+            "enableScope": "crane",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "executeIfScopeEnabled": "crane",
+                "relatedValue": "excavator_crane_multiplier",
+                "number": 1
+              },
+              {
+                "type": "multiply",
+                "executeIfScopeEnabled": "excavator",
+                "relatedValue": "excavator_crane_multiplier",
+                "number": 0
+              },
+              {
+                "type": "add",
+                "executeIfScopeEnabled": "excavator",
+                "relatedValue": "excavator_crane_multiplier",
+                "number": 1.2
+              }
+            ]
+          },
+          {
+            "type": "sectionItemWithScope",
+            "name": "Roller",
+            "description": "Roller which allows you to flatten the ground.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Roller",
+            "enableScope": "roller",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "executeIfScopeEnabled": "roller",
+                "relatedValue": "roller_multiplier",
+                "number": 0.9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "name": "How many building sites you want to handle? *",
+        "mustSelectRequirement": {
+          "enabled": true,
+          "messageIfNotSelected": "Question 2 - Choose number of building sites"
+        },
+        "selectionType": "single",
+        "items": [
+          {
+            "type": "sectionItem",
+            "name": "1-5 building sites",
+            "description": "Not very complicated building sites, which contains only few buildings and roads.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Small",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "relatedValue": "building_days",
+                "number": 15
+              }
+            ]
+          },
+          {
+            "type": "sectionItem",
+            "name": "6-9 building sites",
+            "description": "Medium sized building sites which contains more than 5 buildings and roads.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Medium",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "relatedValue": "building_days",
+                "number": 30
+              }
+            ]
+          },
+          {
+            "type": "sectionItem",
+            "name": "9-15 building sites",
+            "description": "Large building sites which contains more than 10 buildings and roads and at least one bridge or tunnel.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Large",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "relatedValue": "building_days",
+                "number": 80
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "name": "How quickly should the work be completed?",
+        "mustSelectRequirement": {
+          "enabled": true,
+          "messageIfNotSelected": "Question 3 - Choose speed of work"
+        },
+        "selectionType": "single",
+        "items": [
+          {
+            "type": "sectionItem",
+            "name": "Normal",
+            "description": "Depending on available professionals, but no later than 30 days from signing the contract.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Normal",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "relatedValue": "speed_multiplier",
+                "number": 1
+              }
+            ]
+          },
+          {
+            "type": "sectionItem",
+            "name": "Priority",
+            "description": "Depending on available professionals, but no later than 14 days from signing the contract.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Priority",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "relatedValue": "speed_multiplier",
+                "number": 2
+              }
+            ]
+          },
+          {
+            "type": "sectionItem",
+            "name": "ASAP",
+            "description": "As soon as possible, no later than 7 days from signing the contract.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=ASAP",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "relatedValue": "speed_multiplier",
+                "number": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "name": "What materials should we use?",
+        "mustSelectRequirement": {
+          "enabled": true,
+          "messageIfNotSelected": "Question 4 - Choose level of used materials"
+        },
+        "selectionType": "single",
+        "items": [
+          {
+            "type": "sectionItem",
+            "name": "Cheap only",
+            "description": "It will do its job, but it will not be very durable.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Cheap",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "relatedValue": "building_days",
+                "number": 5
+              }
+            ]
+          },
+          {
+            "type": "sectionItem",
+            "name": "Basic",
+            "description": "Standard materials, which will be durable enough.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Basic",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "relatedValue": "building_days",
+                "number": 10
+              }
+            ]
+          },
+          {
+            "type": "sectionItem",
+            "name": "Prestidge",
+            "description": "Premium materials, which will make your building site look great.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Prestidge",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "relatedValue": "building_days",
+                "number": 20
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "name": "Choose your additional facilities at the construcion site",
+        "selectionType": "multi",
+        "items": [
+          {
+            "type": "sectionItem",
+            "name": "Guard station",
+            "description": "Guard station will protect your building site from thieves.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Guard+station",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "relatedValue": "building_days",
+                "number": 1
+              }
+            ]
+          },
+          {
+            "type": "sectionItem",
+            "name": "Monitoring",
+            "description": "Monitoring will protect your building site from thieves and will help you to find out who is responsible for any damage.",
+            "imgHref": "https://dummyimage.com/300x300/000/fff&text=Monitoring",
+            "operationsIfEnabled": [
+              {
+                "type": "add",
+                "relatedValue": "building_days",
+                "number": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "endingOperationsDefinition",
+    "items": [
+      {
+        "type": "addValues",
+        "fromValue": "roller_multiplier",
+        "toValue": "multiplier"
+      },
+      {
+        "type": "addValues",
+        "fromValue": "excavator_crane_multiplier",
+        "toValue": "multiplier"
+      },
+      {
+        "type": "addValues",
+        "fromValue": "speed_multiplier",
+        "toValue": "multiplier"
+      },
+      {
+        "type": "copyValues",
+        "fromValue": "building_days",
+        "toValue": "multiplied_building_days"
+      },
+      {
+        "type": "multiplyValues",
+        "byValue": "multiplier",
+        "value": "multiplied_building_days"
+      },
+      {
+        "type": "copyValues",
+        "fromValue": "multiplied_building_days",
+        "toValue": "active_working_hours"
+      },
+      {
+        "type": "multiply",
+        "relatedValue": "active_working_hours",
+        "number": 8
+      },
+      {
+        "type": "copyValues",
+        "fromValue": "active_working_hours",
+        "toValue": "price"
+      },
+      {
+        "type": "multiplyValues",
+        "byValue": "workday_price",
+        "value": "price"
+      }
+    ]
+  },
+  {
+    "type": "summaryDefinition",
+    "totalPriceDescription": "Total: ",
+    "noScopeDisclaimer": "Choose missing options to see the price",
+    "currency": " zł gross",
+    "items": [
+      {
+        "type": "summaryItem",
+        "text": "Work hours: "
+      }
+    ]
+  },
+  {
+    "type": "valuesDefinition",
+    "items": [
+      {
+        "type": "value",
+        "id": "roller_multiplier",
+        "defaultValue": 0
+      },
+      {
+        "type": "value",
+        "id": "excavator_crane_multiplier",
+        "defaultValue": 0
+      },
+      {
+        "type": "value",
+        "id": "speed_multiplier",
+        "defaultValue": 0
+      },
+      {
+        "type": "value",
+        "id": "workday_price",
+        "defaultValue": 100
+      },
+      {
+        "type": "value",
+        "id": "multiplier",
+        "defaultValue": 0
+      },
+      {
+        "type": "value",
+        "id": "building_days",
+        "defaultValue": 0
+      },
+      {
+        "type": "value",
+        "id": "multiplied_building_days",
+        "defaultValue": 0
+      },
+      {
+        "type": "value",
+        "id": "active_working_hours",
+        "defaultValue": 0
+      },
+      {
+        "type": "price",
+        "id": "price",
+        "defaultValue": 0
+      }
+    ]
+  }
+]
+
